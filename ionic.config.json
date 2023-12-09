@@ -1,0 +1,7 @@
+{
+  "name": "view",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

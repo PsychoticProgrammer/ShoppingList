@@ -1,0 +1,54 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons>
+        <app-back-button lastPage="list/{{listId}}"></app-back-button>
+        <ion-title>Productos para la Lista</ion-title>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="addProductSection">
+      <app-form-search-bar
+        [newItems]="newProducts"
+        [alreadyChosenItems]="alreadyChosenProducts"
+        [fatherItemId]="listId"
+        [resetUsedMeals]="resetUsedMeals"
+        (addedProduct)="addedProduct()"></app-form-search-bar>
+
+      <ion-fab-button size="small" (click)="goToProductForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </div>
+
+    <ion-content class="listSection" #list scrollEvents="true">
+      <ion-list *ngIf="existData && existMatches">
+        <ion-item *ngFor="let product of newProducts;">
+          <ion-toolbar>
+            <app-list-product-item
+            isListCreated="false"
+            listStatus="NC"
+            [listProduct]="product"
+            (removedProduct)="removeFromList($event)"></app-list-product-item>
+          </ion-toolbar>
+        </ion-item>
+      </ion-list>
+      <app-empty-data 
+        *ngIf="!existData || !existMatches"
+        [existData]="existData"
+        [existMatches]="existMatches"></app-empty-data>
+    </ion-content>
+
+    <ion-button *ngIf="newProducts.length > 0"
+      expand="block"
+      (click)="saveListNewProducts()">
+      Agregar Productos
+    </ion-button>
+      
+  </ion-content> 
+</div>
+
+
+
+

@@ -1,0 +1,8 @@
+<ion-alert
+    [isOpen]="isOpen"
+    header="Confirmar Acción"
+    subHeader='¿Está seguro que quiere eliminar {{subHeader}}?'
+    [message]="message"
+    [buttons]="confirmModalButtons"
+    (didDismiss)="closeModal()"
+></ion-alert>

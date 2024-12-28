@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  SERVICES_HOST_IP: "localhost",
+  DEFAULT_IMAGE: "https://ionicframework.com/docs/img/demos/card-media.png"
 };
 
 /*

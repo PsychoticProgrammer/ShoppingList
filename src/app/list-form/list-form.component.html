@@ -1,0 +1,65 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons>
+        <app-back-button lastPage="list"></app-back-button>
+        <ion-title>Agregar Lista de Compras</ion-title>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-input class="name"
+      [(ngModel)]="listName"
+      label="Nombre:" 
+      labelPlacement="stacked" 
+      placeholder="Nombre de la Lista" 
+      type="text"
+      fill="outline"></ion-input>
+
+    <div class="fillListSection">
+      <app-form-search-bar
+        [newItems]="newListProducts"
+        [resetUsedMeals]="resetUsedMeals"
+        (addedProduct)="addedProduct()"
+        (removedMeal)="removeMeal($event)"></app-form-search-bar>
+
+      <ion-fab-button size="small" (click)="goToProductForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </div>
+
+    <ion-content class="listSection" #list scrollEvents="true">
+      <ion-list *ngIf="existData && existMatches" class="listPosition">
+        <ion-item *ngFor="let product of newListProducts;">
+          <ion-toolbar>
+            <app-list-product-item
+            isListCreated="false"
+            listStatus="NC"
+            [listProduct]="product"
+            (removedProduct)="removeFromList($event)"></app-list-product-item>
+          </ion-toolbar>
+        </ion-item>
+      </ion-list>
+      <app-empty-data 
+        *ngIf="!existData || !existMatches"
+        [existData]="existData"
+        [existMatches]="existMatches"></app-empty-data>
+    </ion-content>
+
+    <ion-button *ngIf="newListProducts.length > 0"
+      expand="block"
+      (click)="saveList()">
+      Guardar Lista
+    </ion-button>
+
+  </ion-content> 
+
+  <ion-alert
+    [isOpen]="isErrorAlertOpen"
+    header="Información Faltante"
+    [subHeader]="errorDescription"
+    [buttons]="acceptAlertButton"
+    (didDismiss)="closeAlert()"
+  ></ion-alert>
+</div>

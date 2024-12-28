@@ -1,0 +1,66 @@
+<div class="item">
+  <div class="header" (click)="goToListDetail()">
+    <ion-label class="title">{{index + 1}}. {{list.name}}</ion-label>
+    <ion-label class="date">{{list.date | date:'dd/MM/yyyy'}}</ion-label>
+  </div>
+  <div class="body">
+    <div class="info" (click)="goToListDetail()">
+      <ion-label>{{list.status | typePipe}}</ion-label>
+      <div class="estimatedCostSection" *ngIf="list.estimatedCost != null">
+        <ion-label>
+          <b>Costo Estimado:</b>
+        </ion-label>
+        <ion-label>{{list.estimatedCost}} USD</ion-label>
+      </div>
+    </div>
+    <div class="buttonsSection">
+      <ion-button (click)="open_close_modal()">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="open_close_confirm_modal()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen" class="modal">
+    <ng-template>
+
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Cambiar Nombre</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            [(ngModel)]="name"
+            label="Nombre:"
+            labelPlacement="stacked"
+            placeholder="Nombre de la Lista"
+            type="text"
+          ></ion-input>
+        </ion-item>
+
+        <ion-button 
+          expand="block"
+          (click)="editList()">
+          Guardar Cambios
+        </ion-button>
+      </ion-content>
+
+    </ng-template>
+  </ion-modal>
+
+  <app-confirm-delete-modal 
+    [isOpen]="isConfirmModalOpen"
+    subHeader='"{{list.name}}"'
+    message="Esto eliminará todos los productos que conforman la lista"
+    (removedItem)="removeList()"
+    ></app-confirm-delete-modal>
+
+</div>

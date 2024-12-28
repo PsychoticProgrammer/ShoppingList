@@ -1,0 +1,13 @@
+<div class="noResults">
+  <div class="noMatches" *ngIf="hasMatches()">
+    <div class="noMatchesIcon">
+      <ion-icon class="lens" name="search"></ion-icon>
+      <ion-icon class="ex" name="close"></ion-icon>
+    </div>
+    <ion-label>¡Vaya! <br> No se encontraron Resultados</ion-label>
+  </div>
+  <div class="noData" *ngIf="!existData">
+    <ion-label>Aún no has Guardado Nada</ion-label>
+    <ion-icon name="ellipsis-horizontal"></ion-icon>
+  </div>
+</div>

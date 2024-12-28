@@ -1,0 +1,85 @@
+<div class="item">
+  <div class="header" (click)="goToMealDetail()">
+    <ion-label>
+      {{index + 1}}. {{meal.name}}
+    </ion-label>
+  </div>
+  <div class="body">
+    <div class="info" (click)="goToMealDetail()">
+      <ion-label>{{meal.type | typePipe}}</ion-label>
+      <div class="aliasInfo" *ngIf="getAlias() != ''">
+        <ion-label><b>Alias:</b></ion-label>
+        <ion-label>{{getAlias()}}</ion-label>
+      </div>
+    </div>
+    <div class="buttonsSection">
+      <ion-button (click)="open_close_modal()">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="open_close_confirm_modal()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Cambiar Datos</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="ion-padding">
+        <div class="mainInfoSection">
+          <ion-item class="name">
+            <ion-input
+              [(ngModel)]="name"
+              label="Nombre:"
+              labelPlacement="stacked"
+              placeholder="Nombre de la Receta"
+              type="text"
+            ></ion-input>
+          </ion-item>
+  
+          <ion-item class="alias">
+            <ion-input 
+              [(ngModel)]="alias"
+              label="Alias:"
+              labelPlacement="stacked"
+              placeholder="alias1,alias2,alias3"
+              type="text"
+              (keydown)="checkAlias($event)"
+              ></ion-input>
+          </ion-item>
+  
+          <ion-radio-group class="type"
+            (ionChange)="setType($event)"
+            [(ngModel)]="type">
+            <ion-radio value="D">Diaria</ion-radio>
+            <ion-radio value="S">Especial</ion-radio>
+          </ion-radio-group>
+        </div>
+
+        <ion-button 
+          expand="block"
+          (click)="editMeal()">
+          Guardar Cambios
+        </ion-button>
+      </ion-content>
+
+    </ng-template>
+  </ion-modal>
+
+  <app-confirm-delete-modal 
+    [isOpen]="isConfirmModalOpen"
+    subHeader='"{{meal.name}}"'
+    message="Esto eliminará todos los productos que esta tenga"
+    (removedItem)="removeMeal()"
+    ></app-confirm-delete-modal>
+
+</div>

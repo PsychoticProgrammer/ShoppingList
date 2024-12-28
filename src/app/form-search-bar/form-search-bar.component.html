@@ -1,0 +1,42 @@
+<div class="searchBarBody">
+  <ion-searchbar class="formSearchBar" 
+    animated 
+    show-clear-button="focus"
+    [placeholder]="placeholder"
+    (keyup)="search($event)"
+    (click)="showPopover($event)"
+    (ionClear)="clearSearch()">
+  </ion-searchbar>
+  <div class="searchType">
+    <ion-buttons>
+      <ion-button *ngIf="searchType == 'product'" (click)="changeSearchType()">
+        <ion-icon name="basket"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="searchType == 'meal'" (click)="changeSearchType()">
+        <ion-icon name="restaurant"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+</div>
+
+<ion-popover #popover
+    [isOpen]="isPopoverOpen"
+    (didDismiss)="isPopoverOpen = false"
+    keyboard-close="false"
+    show-backdrop="false">
+  <ng-template>
+    <ion-content class="ion-padding">
+      <div class="availableMatches"
+        *ngFor="let match of matches"
+        (click)="isChosen(match.id) == false ? addToList(match.id) : mealDeselected(match.id)"
+        [ngStyle]="{'color': isChosen(match.id) == true ? 'gray' : 'black'}">
+        <div class="popHeader">
+          <ion-label>{{match.name | titlecase}} {{match.brand | titlecase}}</ion-label>
+          <ion-label class="isInList" *ngIf="isChosen(match.id)">Ya en Lista</ion-label>
+        </div>
+        <ion-label *ngIf="getAlias(match) != ''">{{getAlias(match) | titlecase}}</ion-label>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-popover>
+

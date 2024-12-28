@@ -1,0 +1,64 @@
+<ion-modal [isOpen]="isOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{listMealProduct.name}} {{listMealProduct.brand}}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">Cancel</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      
+      <div class="extraProductInfoSection">
+        <div class="quantitySection">
+          <ion-input 
+            [(ngModel)]="quantity"
+            label="Unidades: " 
+            labelPlacement="stacked"   
+            type="number"
+            fill="outline"
+            errorText="Llenar los campos"
+            (keydown)="onlyNumbers($event,[66])"></ion-input>
+      
+          <ion-input 
+            [(ngModel)]="measurement"
+            label="Cantidad: " 
+            labelPlacement="stacked"  
+            placeholder="ej: 200 ml"
+            type="text"
+            fill="outline"
+            errorText="Llenar los campos"
+            (ionBlur)="checkMeasurementUnit($event)"
+            (keydown)="checkMeasurementFormat($event)"></ion-input>
+        </div>
+      
+        <ion-input 
+          [(ngModel)]="brand"
+          label="Marca: " 
+          labelPlacement="stacked" 
+          placeholder="Marca del Producto"   
+          type="text"
+          fill="outline"
+          errorText="Llenar los campos"></ion-input>
+
+        <div class="estimatedCost">
+          <ion-input 
+            [(ngModel)]="estimatedCost"
+            label="$ USD "
+            placeholder="00.00"
+            helperText="Costo por Unidad"
+            type="text"
+            fill="outline"
+            (keydown)="checkEstimatedCostFormat($event)">
+          </ion-input>
+        </div>
+      
+        <ion-button (click)="editListProduct()" expand="block">
+          Aceptar
+        </ion-button>
+      </div>
+
+    </ion-content>
+  </ng-template>
+</ion-modal>

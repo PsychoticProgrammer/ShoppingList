@@ -1,0 +1,33 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Lista de Compras Guardadas</ion-title>
+    </ion-toolbar>
+    <ion-searchbar class="searchBar" 
+      animated 
+      placeholder="Buscar Listas"
+      show-clear-button="focus"
+      (keyup)="search($event)"
+      (ionClear)="clearSearch()"></ion-searchbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list *ngIf="existData && existMatches" class="listPosition">
+      <ion-item *ngFor="let list of lists; let i = index">
+        <ion-toolbar>
+          <app-list-item [list]="list" [index]="i" (removedList)="reloadLists()"></app-list-item>
+        </ion-toolbar>
+      </ion-item>
+    </ion-list>
+    <app-empty-data 
+      *ngIf="!existData || !existMatches"
+      [existData]="existData"
+      [existMatches]="existMatches"></app-empty-data>
+  </ion-content> 
+    
+    <app-add-button route="list-form"></app-add-button> 
+
+</div>

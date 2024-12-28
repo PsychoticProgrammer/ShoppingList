@@ -1,0 +1,51 @@
+.item{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.header{
+    padding-left: 10px;
+
+    .title{
+        font-weight: bold;
+    }
+
+    .date{
+        margin-left: 20px;
+    }
+}
+
+.body{
+    display: flex;
+    width: 100%;
+}
+
+.info{
+    width: 100%;
+    padding: 5px;
+    padding-left: 20px;
+
+    .estimatedCostSection{
+        margin-top: 5px;
+    }
+}
+
+.buttonsSection{
+    align-self: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+ion-modal {
+    --height: 30%;
+    --border-radius: 16px;
+}
+
+ion-modal::part(backdrop) {
+    background: rgb(0, 0, 0);
+    opacity: 1;
+}
+  

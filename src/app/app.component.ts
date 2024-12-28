@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ListModeObserverService } from './services/list-mode-observer.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+
+  isTabVisible: boolean = true;
+
+  constructor(private listModeObserver: ListModeObserverService){
+    this.hideTab();
+    this.showTab();
+  }
+
+  hideTab(){
+    this.listModeObserver.createListEvent.subscribe(() => {
+      this.isTabVisible = false;
+    });
+  }
+
+  showTab(){
+    this.listModeObserver.closeListEvent.subscribe(() => {
+      this.isTabVisible = true;
+    });
+  }
+
 }

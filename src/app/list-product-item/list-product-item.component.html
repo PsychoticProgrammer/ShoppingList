@@ -1,0 +1,84 @@
+<div class="item">
+  <!-- (click)="open_close_modal()"  -->
+  <div class="header"  (contextmenu)="preventContextMenu($event)"
+    (touchstart)="startTimer()"
+    (touchend)="stopTimer()"
+    (mousedown)="startTimer()"
+    (moauseup)="stopTimer()">
+    <ion-label>{{listProduct.name}} {{listProduct.brand}}</ion-label>
+  </div>
+
+  <div class="body">
+    <div class="info">
+      <div class="imageBody" *ngIf="listProduct.image != null">
+        <div class="image"
+          style="background-image: url('{{listProduct.image}}');"
+          (click)="open_close_ImageViewer()">
+        </div>
+      </div>
+      <div class="detail"
+        (contextmenu)="preventContextMenu($event)"
+        (touchstart)="startTimer()"
+        (touchend)="stopTimer()"
+        (mousedown)="startTimer()"
+        (moauseup)="stopTimer()">
+        <ion-label class="alias" *ngIf="getAlias() != ''">{{getAlias()}}</ion-label>
+        <ion-label><b>Unidades:</b> {{listProduct.quantity}}</ion-label>
+        <ion-label *ngIf="isNotNull(listProduct.measurement)">
+          <b>Cantidad:</b> {{listProduct.measurement}} {{listProduct.measurementUnit}}
+        </ion-label>
+        <ion-label *ngIf="isNotNull(listProduct.estimatedCost)">
+          <b>Costo Estimado:</b> <br>
+           {{listProduct.estimatedCost != null && listProduct.quantity != null 
+          ? listProduct.estimatedCost * listProduct.quantity 
+          : listProduct.estimatedCost}} USD
+        </ion-label>
+      </div>
+    </div>
+
+    <div class="buttonsSection">
+
+      <div class="actionSection" *ngIf="isListProductEditable()">
+        <ion-button *ngIf="!isListCreated" color="danger" (click)="open_close_confirm_modal()">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+  
+        <div class="checkboxSection">
+          <ion-checkbox
+            [checked]="isChecked()"
+            *ngIf="isListCreated"
+            aria-label=""
+            (ionChange)="chooseProduct()">
+          </ion-checkbox>
+          <ion-label class="status">{{listProduct.status | typePipe}}</ion-label>
+        </div>
+      </div>
+      
+      <ion-label *ngIf="isListProductEditable() == false" class="status">{{listProduct.status | typePipe}}</ion-label>
+
+    </div>
+
+  </div>
+  
+  <app-list-product-modal 
+    *ngIf="isListProductEditable()" 
+    [isOpen]="isModalOpen"
+    (closedModal)="open_close_modal()"
+    (editedInfo)="refreshList()"
+    [listMealProduct]="listProduct"
+    isList="true"></app-list-product-modal>
+
+  <app-confirm-delete-modal 
+    [isOpen]="isConfirmModalOpen"
+    subHeader='"{{listProduct.name}} {{listProduct.brand}}" de la lista'
+    (removedItem)="removeProduct()"
+    (closedModal)="isConfirmModalOpen = false"
+    ></app-confirm-delete-modal>
+
+  <app-image-viewer 
+    [isOpen]="isImageViewerOpen"
+    product="{{listProduct.name}} {{listProduct.brand}}"
+    image="{{listProduct.image}}"
+    (closedModal)="open_close_ImageViewer()"></app-image-viewer>
+
+</div>

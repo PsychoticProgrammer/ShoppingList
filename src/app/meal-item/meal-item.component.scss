@@ -1,0 +1,65 @@
+.item{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.body{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.info{
+    width: 100%;
+    padding-left: 20px;
+}
+
+.aliasInfo{
+    margin-top: 5px;
+}
+
+.buttonsSection{
+    align-self: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+ion-modal {
+    --height: 40%;
+    --border-radius: 16px;
+}
+
+ion-modal::part(backdrop) {
+    background: rgb(0, 0, 0);
+    opacity: 1;
+}
+
+.mainInfoSection{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "name name"
+                "alias type";
+    .name{
+        grid-area: name;
+    }
+
+    .alias{
+        grid-area: alias;
+    }
+
+    .type{
+        grid-area: type;
+        height: 100%;
+        align-self: center;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+}

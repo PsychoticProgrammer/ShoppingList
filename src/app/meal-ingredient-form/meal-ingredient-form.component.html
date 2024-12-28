@@ -1,0 +1,49 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons>
+        <app-back-button lastPage="meal/{{mealId}}"></app-back-button>
+        <ion-title>Agregar Ingredientes</ion-title>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="addIngredientSection">
+      <app-form-search-bar
+        type="meal"
+        [newItems]="newIngredients"
+        [alreadyChosenItems]="alreadyChosenProducts"
+        [fatherItemId]="mealId"
+        (addedProduct)="addedProduct()"></app-form-search-bar>
+
+      <ion-fab-button size="small" (click)="goToProductForm()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </div>
+
+    <ion-content class="listSection" #list scrollEvents="true">
+      <ion-list *ngIf="existData && existMatches" class="listPosition">
+        <ion-item *ngFor="let ingredient of newIngredients;">
+          <ion-toolbar>
+            <app-meal-ingredient-item
+              isMealCreated="false"
+              [ingredient]="ingredient"
+              (removedIngredient)="removeFromList($event)"></app-meal-ingredient-item>
+          </ion-toolbar>
+        </ion-item>
+      </ion-list>
+      <app-empty-data 
+        *ngIf="!existData || !existMatches"
+        [existData]="existData"
+        [existMatches]="existMatches"></app-empty-data>
+    </ion-content>
+
+    <ion-button *ngIf="newIngredients.length > 0"
+      expand="block"
+      (click)="saveIngredients()">
+      Agregar Ingredientes
+    </ion-button>
+
+  </ion-content> 
+</div>

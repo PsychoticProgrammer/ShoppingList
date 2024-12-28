@@ -1,0 +1,69 @@
+<div class="ion-page" id="main-content">
+  <ion-header class="header">
+    <ion-toolbar >
+      <ion-buttons>
+        <app-back-button [lastPage]="getLastPage()"></app-back-button>
+        <ion-title>{{titleText}} Producto</ion-title>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div class="inputSection">
+      <ion-input
+        [(ngModel)]="name"
+        label="Nombre:" 
+        labelPlacement="stacked"  
+        placeholder="Nombre del Producto"
+        type="text"
+        fill="outline"></ion-input>
+
+      <ion-input
+        [(ngModel)]="alias"
+        label="Alias:" 
+        labelPlacement="stacked"  
+        placeholder="alias1,alias2,alias3"
+        type="text"
+        fill="outline"
+        helperText="Max. 3, separados con una coma"
+        (keydown)="checkAlias($event)"></ion-input>
+
+      <ion-input 
+        [(ngModel)]="brand"
+        label="Marca:" 
+        labelPlacement="stacked"
+        placeholder="Marca del Producto"  
+        type="text"
+        fill="outline"></ion-input>
+
+      <ion-input 
+        [(ngModel)]="image"
+        label="Imagen:" 
+        labelPlacement="stacked" 
+        placeholder="URL de la imagen" 
+        type="text"
+        fill="outline"></ion-input>
+    </div>
+
+    <ion-button (click)="buttonAction()" expand="block">
+      {{buttonText}}
+    </ion-button>
+
+    <ion-toast
+      [isOpen]="isToastOpen"
+      message="Producto Guardado Exitosamente"
+      [duration]="toastDuration"
+      (didDismiss)="closeToast()"
+    ></ion-toast>
+      
+  </ion-content> 
+
+  <ion-alert
+    [isOpen]="isErrorAlertOpen"
+    header="Información Faltante"
+    [subHeader]="errorDescription"
+    [buttons]="acceptAlertButton"
+    (didDismiss)="closeAlert()"
+  ></ion-alert>
+  
+</div>

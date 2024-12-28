@@ -1,0 +1,53 @@
+.mainInfoSection{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "name name"
+                "alias type";
+    .name{
+        grid-area: name;
+        margin-top: 10px;
+        padding-right: 20px;
+    }
+
+    .alias{
+        grid-area: alias;
+        padding-right: 20px;
+    }
+
+    .type{
+        height: 100%;
+        padding-right: 20px;
+        grid-area: type;
+        align-self: center;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+}
+
+.addIngredientSection{
+    display: flex;
+
+    .searchBar{
+        width: 80%;
+    }
+}
+
+.listSection{
+    height: calc(70% - 120px);
+}
+
+ion-popover {
+    --backdrop-opacity: 0.6;
+    --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+    --width: 300px;
+
+    ion-content{
+        max-height: 40vh;
+    }
+}
+
+.availableIngredients{
+    display: flex;
+    flex-direction: column;
+}

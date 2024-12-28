@@ -1,0 +1,39 @@
+.searchBarBody{
+    position: relative;
+}
+
+.searchType{
+    position: absolute;
+    top: 12px;
+    right: 10px;
+
+    ion-icon{
+        font-size: 1.5rem;
+    }
+}
+
+ion-popover {
+    --backdrop-opacity: 0.6;
+    --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+    --width: 300px;
+
+    ion-content{
+        max-height: 40vh;
+    }
+}
+
+.availableMatches{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px dashed rgb(172, 172, 172);
+
+    .popHeader{
+        display: flex;
+        justify-content: space-between;
+        
+        .isInList{
+            font-size: 0.8rem;
+        }
+    }
+}

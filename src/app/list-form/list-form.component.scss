@@ -1,0 +1,19 @@
+.name{
+    margin-top: 20px;
+}
+
+.fillListSection{
+    display: flex;
+
+    .searchBar{
+        width: 80%;
+    }
+}
+
+.quantitySection{
+    display: flex;
+}
+
+.listSection{
+    height: calc(80% - 120px);
+}

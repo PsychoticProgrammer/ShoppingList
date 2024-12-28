@@ -1,0 +1,26 @@
+.addProductSection{
+    display: flex;
+
+    .searchBar{
+        width: 80%;
+    }
+}
+
+.listSection{
+    height: calc(92% - 120px);
+}
+
+ion-popover {
+    --backdrop-opacity: 0.6;
+    --box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+    --width: 300px;
+
+    ion-content{
+        max-height: 40vh;
+    }
+}
+
+.availableMatches{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,19 @@
+ion-modal {
+    --height: 60%;
+    --border-radius: 16px;
+}
+
+ion-modal::part(backdrop) {
+    background: rgb(0, 0, 0);
+    opacity: 1;
+}
+
+ion-input{
+    margin-bottom: 15px;
+}
+
+.quantitySection{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}

@@ -1,0 +1,49 @@
+<div class="item">
+  <div class="header" (click)="open_close_modal()">
+    <ion-label>{{ingredient.name}} {{ingredient.brand}}</ion-label>
+  </div>
+  <div class="body">
+    <div class="info">
+    <div class="imageBody" *ngIf="ingredient.image != null">
+      <div class="image"
+      style="background-image: url('{{ingredient.image}}');"
+      (click)="open_close_ImageViewer()">
+      </div>
+    </div>
+      <div class="detail" (click)="open_close_modal()">
+        <div class="aliasSection" *ngIf="getAlias() != ''">
+          <ion-label>Alias:</ion-label>
+          <ion-label>{{getAlias()}}</ion-label>
+        </div>
+        <ion-label>Unidades: {{ingredient.quantity}}</ion-label>
+        <ion-label *ngIf="isNotNull(ingredient.measurement)">Cantidad: {{ingredient.measurement}} {{ingredient.measurementUnit}}</ion-label>
+        <ion-label *ngIf="isNotNull(ingredient.estimatedCost)">Costo Estimado: {{ingredient.estimatedCost != null && ingredient.quantity != null 
+          ? ingredient.estimatedCost * ingredient.quantity 
+          : ingredient.estimatedCost}}</ion-label>
+      </div>
+    </div>
+    <div class="buttonsSection">
+      <ion-button color="danger" (click)="open_close_confirm_modal()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <app-list-product-modal
+    [isOpen]="isModalOpen"
+    (closedModal)="open_close_modal()"
+    [listMealProduct]="ingredient"
+    isList="false"></app-list-product-modal>
+
+  <app-confirm-delete-modal 
+    [isOpen]="isConfirmModalOpen"
+    subHeader='"{{ingredient.name}} {{ingredient.brand}}"'
+    (removedItem)="removeIngredient()"
+    ></app-confirm-delete-modal>
+
+  <app-image-viewer 
+    [isOpen]="isImageViewerOpen"
+    product="{{ingredient.name}} {{ingredient.brand}}"
+    image="{{ingredient.image}}"
+    (closedModal)="open_close_ImageViewer()"></app-image-viewer>
+</div>

@@ -1,0 +1,59 @@
+<div class="ion-page" id="main-content">
+  <!-- <ion-header> -->
+  <ion-toolbar>
+    <div class="titleSection">
+      <ion-buttons>
+        <app-back-button lastPage="list"></app-back-button>
+        <ion-title>{{list.name | titlecase}}</ion-title>
+      </ion-buttons>
+      <ion-label>{{list.date | date:'dd / MM / yyyy'}}</ion-label>
+    </div>
+    <ion-label>{{list.status | typePipe}}</ion-label><br>
+    <ion-label *ngIf="list.estimatedCost != null">Costo Estimado: {{list.estimatedCost}}</ion-label>
+  </ion-toolbar>
+  <!-- </ion-header> -->
+    
+  <ion-searchbar class="searchBar"
+    animated
+    show-clear-button="focus" 
+    placeholder="Buscar"
+    (keyup)="search($event)"
+    (ionClear)="clearSearch()"></ion-searchbar>
+  <!-- <ion-label>Detalle Productos</ion-label> -->
+
+  <ion-content>
+    <ion-list *ngIf="existData && existMatches" class="listPosition">
+      <ion-item *ngFor="let product of listProducts">
+        <ion-toolbar>
+          <app-list-product-item
+            [isListCreated]="true"
+            [listStatus]="list.status"
+            [listProduct]="product"
+            (removedProduct)="reloadProducts()"
+            (chosenProduct)="reloadProducts()"
+            (refreshedListCost)="refreshList()"></app-list-product-item>
+        </ion-toolbar>
+      </ion-item>
+      <ion-button *ngIf="list.status == 'O'"
+        expand="block"
+        (click)="isAlertOpen = true">
+        Terminar Lista
+      </ion-button>
+    </ion-list>
+    <app-empty-data 
+      *ngIf="!existData || !existMatches"
+      [existData]="existData"
+      [existMatches]="existMatches"></app-empty-data>
+  </ion-content>  
+
+  <app-add-button *ngIf="list.status == 'O'" route="list-product-form/{{list.id}}"></app-add-button>
+
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="Confirmar Acción"
+    subHeader='¿Está seguro que quiere cerrar la lista "{{list.name}}"?'
+    message='Se marcarán todos los productos restantes como "No Comprado"'
+    [buttons]="alertButtons"
+    (didDismiss)="isAlertOpen= false"
+  ></ion-alert> 
+</div>

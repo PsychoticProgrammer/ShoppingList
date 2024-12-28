@@ -1,0 +1,17 @@
+.imageBody{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image{
+    height: 50%;
+    width: 100%;
+    background-image: url('https://ionicframework.com/docs/img/demos/card-media.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+

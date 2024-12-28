@@ -1,0 +1,40 @@
+<div class="item">
+  <div class="header" (click)="editProduct()">
+    <ion-label>{{product.name}} {{product.brand}}</ion-label>
+  </div>
+
+  <div class="body">
+    <div class="info">
+      <div class="imageBody" *ngIf="product.image != null" >
+        <div class="image"
+          style="background-image: url('{{product.image}}');"
+          (click)="open_close_ImageViewer()">
+        </div>
+      </div>
+
+      <div class="alias" (click)="editProduct()" *ngIf="getAlias() != ''">
+        <ion-label>Alias:</ion-label>
+        <ion-label>{{getAlias()}}</ion-label>
+      </div>
+    </div>
+
+    <div class="buttonsSection">
+      <ion-button color="danger" (click)="open_close_confirm_modal()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <app-confirm-delete-modal 
+    [isOpen]="isConfirmModalOpen"
+    subHeader='"{{product.name}} {{product.brand}}"'
+    (removedItem)="removeProduct()"
+    ></app-confirm-delete-modal>
+
+  <app-image-viewer 
+    [isOpen]="isImageViewerOpen"
+    product="{{product.name}} {{product.brand}}"
+    image="{{product.image}}"
+    (closedModal)="open_close_ImageViewer()"></app-image-viewer>
+    
+</div>

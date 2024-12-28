@@ -1,0 +1,31 @@
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Productos</ion-title>
+    </ion-toolbar>
+    <ion-searchbar 
+      class="searchBar"
+      animated
+      placeholder="Buscar Productos"
+      show-clear-button="focus"
+      (keyup)="search($event)"
+      (ionClear)="clearSearch()"></ion-searchbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list *ngIf="existData && existMatches" class="listPosition">
+      <ion-item *ngFor="let product of products">
+        <ion-toolbar>
+          <app-product-item [product]="product" (removedProduct)="reloadProducts()"></app-product-item>
+        </ion-toolbar>
+      </ion-item>
+    </ion-list>
+    <app-empty-data 
+      *ngIf="!existData || !existMatches"
+      [existData]="existData"
+      [existMatches]="existMatches"></app-empty-data>
+  </ion-content>  
+  
+  <app-add-button route="product-form"></app-add-button>
+
+</div>

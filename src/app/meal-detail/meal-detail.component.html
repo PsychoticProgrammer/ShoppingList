@@ -1,0 +1,41 @@
+<div class="ion-page" id="main-content">
+  <!-- <ion-header> -->
+    <ion-toolbar>
+      <div class="titleSection">
+        <ion-buttons>
+          <app-back-button lastPage="meal"></app-back-button>
+          <ion-title>{{meal.name | titlecase}}</ion-title>
+        </ion-buttons>
+      </div>
+      <ion-label *ngIf="getAlias() != ''">Alias: {{getAlias()}}</ion-label><br>
+      <ion-label>Tipo: {{meal.type | typePipe}}</ion-label><br>
+    </ion-toolbar>
+  <!-- </ion-header> -->
+
+  <ion-searchbar
+    class="searchBar"
+    animated
+    show-clear-button="focus"
+    (keyup)="search($event)"
+    (ionClear)="clearSearch()"></ion-searchbar>
+
+  <ion-content>
+    <ion-list *ngIf="existData && existMatches" class="listPosition">
+      <ion-item *ngFor="let ingredient of mealIngredients">
+        <ion-toolbar>
+          <app-meal-ingredient-item
+            [ingredient]="ingredient"
+            [isMealCreated]="true"
+            (removedIngredient)="reloadIngredients()"></app-meal-ingredient-item>
+        </ion-toolbar>
+      </ion-item>
+    </ion-list>
+    <app-empty-data 
+      *ngIf="!existData || !existMatches"
+      [existData]="existData"
+      [existMatches]="existMatches"></app-empty-data>
+  </ion-content>
+
+  <app-add-button route="meal-ingredient-form/{{meal.id}}"></app-add-button>
+
+</div>

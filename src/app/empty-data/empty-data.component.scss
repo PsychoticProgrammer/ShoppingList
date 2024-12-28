@@ -1,0 +1,45 @@
+.noResults{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.noMatches{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: rgb(163, 163, 163);
+}
+
+.noMatchesIcon{
+    position: relative;
+
+    .lens{
+        font-size: 4rem;
+    }
+
+    .ex{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 2rem;
+    }
+
+}
+
+.noData{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: rgb(163, 163, 163);
+
+    ion-icon{
+        font-size: 2.5rem;
+    }
+}
